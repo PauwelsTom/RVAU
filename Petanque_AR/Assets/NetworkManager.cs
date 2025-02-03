@@ -1,16 +1,28 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    //public GameObject BacPetanque;
+    // Liste des boules instanciées pour le joueur local.
+    public List<GameObject> myBalls = new List<GameObject>();
+
+    // Le point de spawn pour les boules (à assigner dans l'inspecteur).
+    public Transform ballSpawnPoint;
+
+    // Espacement entre les boules (pour qu'elles ne se chevauchent pas lors du spawn).
+    public Vector3 ballSpacing = new Vector3(1.5f, 0, 0);
+
+    // Nom du prefab de la boule (celui qui est géré par votre CustomPrefabPool ou placé dans Resources).
+    public string ballPrefabName = "Boule_1";
+
+    // Connexion à Photon lors du démarrage.
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
     }
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connecté à Photon.");
@@ -22,25 +34,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Salle rejointe.");
 
-        if (PhotonNetwork.IsMasterClient)
+        // Lorsqu'un nouveau joueur se connecte, il spawn 3 boules.
+        // Le point de spawn et l'espacement vous permettent de positionner les boules.
+        for (int i = 0; i < 3; i++)
         {
-
-            //PhotonNetwork.Instantiate("BacPetanque", Vector3.zero, Quaternion.identity);
-
-            //PhotonNetwork.Instantiate("Cochonnet", new Vector3(0, 0, 1), Quaternion.identity);
-
-            //PhotonNetwork.Instantiate("Boule_1", new Vector3(-1, 0, 2), Quaternion.identity);
-            //PhotonNetwork.Instantiate("Boule_2", new Vector3(1, 0, 2), Quaternion.identity);
+            Vector3 spawnPos = ballSpawnPoint.position + i * ballSpacing;
+            GameObject ball = PhotonNetwork.Instantiate(ballPrefabName, spawnPos, Quaternion.identity);
+            myBalls.Add(ball);
         }
     }
 
-    public override void OnDisconnected(DisconnectCause cause)
+    // Méthode pour lancer la première boule non lancée.
+    public void LancerBoule()
     {
-        Debug.LogWarningFormat("Déconnecté de Photon pour cause {0}", cause);
+        foreach (GameObject ball in myBalls)
+        {
+            BallController bc = ball.GetComponent<BallController>();
+            PhotonView pv = ball.GetComponent<PhotonView>();
+
+            // Affichage des valeurs pour déboguer
+            Debug.Log("Boule: pickedUp=" + bc.pickedUp + ", launched=" + bc.launched + ", IsMine=" + pv.IsMine);
+
+            if (bc != null && bc.pickedUp && !bc.launched && pv.IsMine)
+            {
+                Debug.Log("On va lancer cette boule.");
+                bc.Launch();
+                return; // Lance la première boule disponible.
+            }
+        }
+        Debug.Log("Toutes les boules ont déjà été lancées.");
     }
 
-    void Update()
+    // Méthode pour ramasser (réinitialiser) toutes les boules du joueur.
+    public void RamasserBoules()
     {
-        
+        foreach (GameObject ball in myBalls)
+        {
+            BallController bc = ball.GetComponent<BallController>();
+            if (bc != null && !bc.pickedUp)
+            {
+                Debug.Log("RAMASSE.");
+                // Transfert de propriété pour que le joueur local puisse gérer la boule
+                ball.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                // On appelle ensuite la méthode de ramassage, en passant par exemple ballSpawnPoint.position
+                bc.PickUp(ballSpawnPoint.position);
+
+            }
+        }
     }
 }
