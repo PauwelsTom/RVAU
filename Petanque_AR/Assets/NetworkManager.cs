@@ -17,6 +17,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Nom du prefab de la boule (celui qui est géré par votre CustomPrefabPool ou placé dans Resources).
     public string ballPrefabName = "Boule_1";
 
+    public GameManager gameManager;
+
     // Connexion à Photon lors du démarrage.
     void Start()
     {
@@ -33,6 +35,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Salle rejointe.");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Vector3 cochonnetPosition = new Vector3(0, 0, 3);
+            GameObject cochonnet = PhotonNetwork.Instantiate("Cochonnet", cochonnetPosition, Quaternion.identity);
+
+            CochonnetController controller = cochonnet.GetComponent<CochonnetController>();
+            if (gameManager != null && controller != null)
+            {
+                gameManager.cochonnetController = controller;
+                Debug.Log("CochonnetController assigné au GameManager.");
+            }
+        }
 
         // Lorsqu'un nouveau joueur se connecte, il spawn 3 boules.
         // Le point de spawn et l'espacement vous permettent de positionner les boules.

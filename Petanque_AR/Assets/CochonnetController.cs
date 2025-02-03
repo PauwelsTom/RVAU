@@ -1,54 +1,59 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class BallController : MonoBehaviourPun, IPunObservable
+public class CochonnetController : MonoBehaviourPun, IPunObservable
 {
-    public bool pickedUp = false;   // Indique si la boule a été ramassée
-    public bool launched = false;     // Indique si la boule a été lancée
-    public float launchForce = 500f;  // Force appliquée lors du lancement
+    public bool pickedUp = false;   // Indique si le cochonnet a été ramassé
+    public bool launched = false;     // Indique si le cochonnet a été lancé
+    public float launchForce = 200f;  // Force appliquée lors du lancement
 
     private Rigidbody rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Aucun Rigidbody trouvé sur " + gameObject.name);
+        }
     }
 
-    // Méthode appelée pour ramasser la boule.
-    // pickupPosition est la position à laquelle la boule est "stockée" (dans un inventaire virtuel par exemple).
+    // Méthode appelée pour ramasser le cochonnet.
+    // Ici, on utilise la même logique que pour les boules.
     public void PickUp(Vector3 pickupPosition)
     {
         if (pickedUp) return;
         pickedUp = true;
         Debug.Log("Cochonnet ramassé !");
+        // On peut repositionner le cochonnet si nécessaire (par exemple, dans un inventaire virtuel)
         transform.position = pickupPosition;
 
+        // Assurez-vous que photonView n'est pas null (le prefab doit avoir un PhotonView)
         if (photonView == null)
         {
             Debug.LogError("PhotonView est null sur ce GameObject !");
             return;
         }
-
+        // Appel de l'RPC pour désactiver le cochonnet sur tous les clients.
         photonView.RPC("PickUpRPC", RpcTarget.AllBuffered);
     }
 
-    // RPC qui désactive la boule pour tout le monde.
+    // RPC qui désactive le cochonnet pour tous les clients.
     [PunRPC]
     void PickUpRPC()
     {
         gameObject.SetActive(false);
-        Debug.Log("PickUpRPC: la boule est désactivée (ramassée).");
+        Debug.Log("PickUpRPC: Cochonnet désactivé (ramassé) sur tous les clients.");
     }
 
-    // Méthode appelée pour lancer la boule.
+    // Méthode appelée pour lancer le cochonnet.
     public void Launch()
     {
-        if (launched) return;
+        if (!pickedUp || launched) return;
         launched = true;
-        // Réactive la boule pour le propriétaire afin qu'elle réapparaisse lors du lancement.
-        // Ici, on active systématiquement pour l'exemple.
+        // Réactive le cochonnet pour le propriétaire afin qu'il réapparaisse lors du lancement.
         gameObject.SetActive(true);
-        Debug.Log("Launch() appelé, la boule est réactivée et lancée.");
+        Debug.Log("Launch() appelé, le cochonnet est réactivé et lancé.");
 
         if (rb != null)
         {

@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|c:\\users\\loicl\\desktop\\rvau\\petanque_ar\\assets\\customprefabpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\customprefabpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\networkmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\networkmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\boulesync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\boulesync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|c:\\users\\loicl\\desktop\\rvau\\petanque_ar\\assets\\cochonnetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\cochonnetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|c:\\users\\loicl\\desktop\\rvau\\petanque_ar\\assets\\customprefabpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\customprefabpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\ballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\ballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\changecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\changecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\boulesync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\boulesync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\networkmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\networkmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\assets\\changecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB5C1062-C84E-6B45-7219-87C51E6EEA69}|Assembly-CSharp.csproj|solutionrelative:assets\\changecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,19 +42,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "CochonnetController.cs",
+              "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\CochonnetController.cs",
+              "RelativeDocumentMoniker": "Assets\\CochonnetController.cs",
+              "ToolTip": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\CochonnetController.cs",
+              "RelativeToolTip": "Assets\\CochonnetController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T12:22:04.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "BallController.cs",
               "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\BallController.cs",
               "RelativeDocumentMoniker": "Assets\\BallController.cs",
               "ToolTip": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\BallController.cs",
               "RelativeToolTip": "Assets\\BallController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACgAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwDQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T16:36:56.851Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "BouleSync.cs",
               "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\BouleSync.cs",
               "RelativeDocumentMoniker": "Assets\\BouleSync.cs",
@@ -62,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "CustomPrefabPool.cs",
               "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\CustomPrefabPool.cs",
               "RelativeDocumentMoniker": "Assets\\CustomPrefabPool.cs",
@@ -75,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ChangeColor.cs",
               "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\ChangeColor.cs",
               "RelativeDocumentMoniker": "Assets\\ChangeColor.cs",
@@ -87,15 +104,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "NetworkManager.cs",
               "DocumentMoniker": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\NetworkManager.cs",
               "RelativeDocumentMoniker": "Assets\\NetworkManager.cs",
               "ToolTip": "C:\\Users\\loicl\\Desktop\\RVAU\\Petanque_AR\\Assets\\NetworkManager.cs",
               "RelativeToolTip": "Assets\\NetworkManager.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwEUAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwCYAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-02T12:24:57.172Z"
+              "WhenOpened": "2025-02-02T12:24:57.172Z",
+              "EditorCaption": ""
             }
           ]
         }
