@@ -3,24 +3,24 @@ using UnityEngine;
 
 public class BallController : MonoBehaviourPun, IPunObservable
 {
-    public bool pickedUp = false;   // Indique si la boule a été ramassée
-    public bool launched = false;     // Indique si la boule a été lancée
-    public float launchForce = 500f;  // Force appliquée lors du lancement
+    public bool pickedUp = false;   // Indique si la boule a ï¿½tï¿½ ramassï¿½e
+    public bool launched = false;     // Indique si la boule a ï¿½tï¿½ lancï¿½e
+    public float launchForce = 500f;  // Force appliquï¿½e lors du lancement
 
     private Rigidbody rb;
 
-    void Awake()
+    void start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Méthode appelée pour ramasser la boule.
-    // pickupPosition est la position à laquelle la boule est "stockée" (dans un inventaire virtuel par exemple).
+    // Mï¿½thode appelï¿½e pour ramasser la boule.
+    // pickupPosition est la position ï¿½ laquelle la boule est "stockï¿½e" (dans un inventaire virtuel par exemple).
     public void PickUp(Vector3 pickupPosition)
     {
         if (pickedUp) return;
         pickedUp = true;
-        Debug.Log("Cochonnet ramassé !");
+        Debug.Log("Cochonnet ramassï¿½ !");
         transform.position = pickupPosition;
 
         if (photonView == null)
@@ -32,23 +32,23 @@ public class BallController : MonoBehaviourPun, IPunObservable
         photonView.RPC("PickUpRPC", RpcTarget.AllBuffered);
     }
 
-    // RPC qui désactive la boule pour tout le monde.
+    // RPC qui dï¿½sactive la boule pour tout le monde.
     [PunRPC]
     void PickUpRPC()
     {
         gameObject.SetActive(false);
-        Debug.Log("PickUpRPC: la boule est désactivée (ramassée).");
+        Debug.Log("PickUpRPC: la boule est dï¿½sactivï¿½e (ramassï¿½e).");
     }
 
-    // Méthode appelée pour lancer la boule.
+    // Mï¿½thode appelï¿½e pour lancer la boule.
     public void Launch()
     {
         if (launched) return;
         launched = true;
-        // Réactive la boule pour le propriétaire afin qu'elle réapparaisse lors du lancement.
-        // Ici, on active systématiquement pour l'exemple.
+        // Rï¿½active la boule pour le propriï¿½taire afin qu'elle rï¿½apparaisse lors du lancement.
+        // Ici, on active systï¿½matiquement pour l'exemple.
         gameObject.SetActive(true);
-        Debug.Log("Launch() appelé, la boule est réactivée et lancée.");
+        Debug.Log("Launch() appelï¿½, la boule est rï¿½activï¿½e et lancï¿½e.");
 
         if (rb != null)
         {
