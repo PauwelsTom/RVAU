@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class BallController : MonoBehaviourPun, IPunObservable
 {
-    public bool pickedUp = false;   // Indique si la boule a �t� ramass�e
+    public bool pickedUp = true;   // Indique si la boule a �t� ramass�e
     public bool launched = false;     // Indique si la boule a �t� lanc�e
     public float launchForce = 500f;  // Force appliqu�e lors du lancement
 
     private Rigidbody rb;
 
-    void start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -20,6 +20,7 @@ public class BallController : MonoBehaviourPun, IPunObservable
     {
         if (pickedUp) return;
         pickedUp = true;
+        launched = false;
         Debug.Log("Cochonnet ramass� !");
         transform.position = pickupPosition;
 
@@ -41,21 +42,29 @@ public class BallController : MonoBehaviourPun, IPunObservable
     }
 
     // M�thode appel�e pour lancer la boule.
-    public void Launch()
+    public void Launch(Transform spawnPoint)
     {
         if (launched) return;
         launched = true;
-        // R�active la boule pour le propri�taire afin qu'elle r�apparaisse lors du lancement.
-        // Ici, on active syst�matiquement pour l'exemple.
+        pickedUp = false; 
+        // Réactive la boule pour le propriétaire afin qu'elle réapparaisse lors du lancement.
         gameObject.SetActive(true);
-        Debug.Log("Launch() appel�, la boule est r�activ�e et lanc�e.");
-
+        Debug.Log("Launch() appelé, la boule est réactivée et lancée.");
+        
         if (rb != null)
         {
-            // Applique une force dans la direction "forward" de l'objet.
-            rb.AddForce(transform.forward * launchForce);
+            // Initialise la position de la boule à la position de spawnPoint
+            transform.position = spawnPoint.position;
+            // transform.rotation = spawnPoint.rotation;
+
+            // Mettre la vitesse à 0
+            rb.linearVelocity = Vector3.zero;
+
+            // Applique une force dans la direction "forward" de spawnPoint
+            rb.AddForce(spawnPoint.forward * launchForce);
         }
     }
+
 
     // Synchronisation de la position et de la rotation via Photon.
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public CochonnetController cochonnetController;
 
+    public Transform camera;
+
     void Start()
     {
         if (cochonnetController == null)
@@ -11,16 +13,16 @@ public class GameManager : MonoBehaviour
             cochonnetController = FindObjectOfType<CochonnetController>();
             if (cochonnetController == null)
             {
-                Debug.LogError("Aucun CochonnetController n'a été trouvé dans la scène.");
+                Debug.LogError("Aucun CochonnetController n'a ï¿½tï¿½ trouvï¿½ dans la scï¿½ne.");
             }
             else
             {
-                Debug.Log("CochonnetController trouvé automatiquement : " + cochonnetController.gameObject.name);
+                Debug.Log("CochonnetController trouvï¿½ automatiquement : " + cochonnetController.gameObject.name);
             }
         }
     }
 
-    // Méthode appelée par le bouton UI pour ramasser le cochonnet.
+    // Mï¿½thode appelï¿½e par le bouton UI pour ramasser le cochonnet.
     public void RamasserCochonnet()
     {
         if (cochonnetController != null)
@@ -29,20 +31,20 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Référence au CochonnetController manquante.");
+            Debug.LogError("Rï¿½fï¿½rence au CochonnetController manquante.");
         }
     }
 
-    // Méthode pour lancer le cochonnet
+    // Mï¿½thode pour lancer le cochonnet
     public void LancerCochonnet()
     {
         if (cochonnetController != null)
         {
-            cochonnetController.Launch();
+            cochonnetController.Launch(camera);
         }
         else
         {
-            Debug.LogError("Référence au CochonnetController manquante.");
+            Debug.LogError("Rï¿½fï¿½rence au CochonnetController manquante.");
         }
     }
 }

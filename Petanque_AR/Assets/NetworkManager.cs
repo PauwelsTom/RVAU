@@ -5,21 +5,21 @@ using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    // Liste des boules instanciées pour le joueur local.
+    // Liste des boules instanciï¿½es pour le joueur local.
     public List<GameObject> myBalls = new List<GameObject>();
 
-    // Le point de spawn pour les boules (à assigner dans l'inspecteur).
+    // Le point de spawn pour les boules (ï¿½ assigner dans l'inspecteur).
     public Transform ballSpawnPoint;
 
     // Espacement entre les boules (pour qu'elles ne se chevauchent pas lors du spawn).
     public Vector3 ballSpacing = new Vector3(1.5f, 0, 0);
 
-    // Nom du prefab de la boule (celui qui est géré par votre CustomPrefabPool ou placé dans Resources).
+    // Nom du prefab de la boule (celui qui est gï¿½rï¿½ par votre CustomPrefabPool ou placï¿½ dans Resources).
     public string ballPrefabName = "Boule_1";
 
     public GameManager gameManager;
 
-    // Connexion à Photon lors du démarrage.
+    // Connexion ï¿½ Photon lors du dï¿½marrage.
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -27,7 +27,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connecté à Photon.");
+        Debug.Log("Connectï¿½ ï¿½ Photon.");
         RoomOptions roomOptions = new RoomOptions { MaxPlayers = 4 };
         PhotonNetwork.JoinOrCreateRoom("PetanqueRoom", roomOptions, TypedLobby.Default);
     }
@@ -38,14 +38,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
-            Vector3 cochonnetPosition = new Vector3(0, 0, 3);
+            Vector3 cochonnetPosition = ballSpawnPoint.position;
             GameObject cochonnet = PhotonNetwork.Instantiate("Cochonnet", cochonnetPosition, Quaternion.identity);
 
             CochonnetController controller = cochonnet.GetComponent<CochonnetController>();
             if (gameManager != null && controller != null)
             {
                 gameManager.cochonnetController = controller;
-                Debug.Log("CochonnetController assigné au GameManager.");
+                Debug.Log("CochonnetController assignï¿½ au GameManager.");
             }
         }
 
@@ -53,13 +53,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Le point de spawn et l'espacement vous permettent de positionner les boules.
         for (int i = 0; i < 3; i++)
         {
-            Vector3 spawnPos = ballSpawnPoint.position + i * ballSpacing;
+            // Vector3 spawnPos = ballSpawnPoint.position + i * ballSpacing;
+            Vector3 spawnPos = ballSpawnPoint.position;
             GameObject ball = PhotonNetwork.Instantiate(ballPrefabName, spawnPos, Quaternion.identity);
             myBalls.Add(ball);
         }
     }
 
-    // Méthode pour lancer la première boule non lancée.
+    // Mï¿½thode pour lancer la premiï¿½re boule non lancï¿½e.
     public void LancerBoule()
     {
         foreach (GameObject ball in myBalls)
@@ -67,20 +68,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             BallController bc = ball.GetComponent<BallController>();
             PhotonView pv = ball.GetComponent<PhotonView>();
 
-            // Affichage des valeurs pour déboguer
+            // Affichage des valeurs pour dï¿½boguer
             Debug.Log("Boule: pickedUp=" + bc.pickedUp + ", launched=" + bc.launched + ", IsMine=" + pv.IsMine);
 
             if (bc != null && bc.pickedUp && !bc.launched && pv.IsMine)
             {
                 Debug.Log("On va lancer cette boule.");
-                bc.Launch();
-                return; // Lance la première boule disponible.
+                bc.Launch(ballSpawnPoint);
+                return; // Lance la premiï¿½re boule disponible.
             }
         }
-        Debug.Log("Toutes les boules ont déjà été lancées.");
+        Debug.Log("Toutes les boules ont dï¿½jï¿½ ï¿½tï¿½ lancï¿½es.");
     }
 
-    // Méthode pour ramasser (réinitialiser) toutes les boules du joueur.
+    // Mï¿½thode pour ramasser (rï¿½initialiser) toutes les boules du joueur.
     public void RamasserBoules()
     {
         foreach (GameObject ball in myBalls)
@@ -89,9 +90,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (bc != null && !bc.pickedUp)
             {
                 Debug.Log("RAMASSE.");
-                // Transfert de propriété pour que le joueur local puisse gérer la boule
+                // Transfert de propriï¿½tï¿½ pour que le joueur local puisse gï¿½rer la boule
                 ball.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
-                // On appelle ensuite la méthode de ramassage, en passant par exemple ballSpawnPoint.position
+                // On appelle ensuite la mï¿½thode de ramassage, en passant par exemple ballSpawnPoint.position
                 bc.PickUp(ballSpawnPoint.position);
 
             }

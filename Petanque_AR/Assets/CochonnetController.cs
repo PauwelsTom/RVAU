@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class CochonnetController : MonoBehaviourPun, IPunObservable
 {
-    public bool pickedUp = false;   // Indique si le cochonnet a été ramassé
-    public bool launched = false;     // Indique si le cochonnet a été lancé
-    public float launchForce = 200f;  // Force appliquée lors du lancement
+    public bool pickedUp = false;   // Indique si le cochonnet a ï¿½tï¿½ ramassï¿½
+    public bool launched = false;     // Indique si le cochonnet a ï¿½tï¿½ lancï¿½
+    public float launchForce = 200f;  // Force appliquï¿½e lors du lancement
 
     private Rigidbody rb;
 
@@ -14,18 +14,19 @@ public class CochonnetController : MonoBehaviourPun, IPunObservable
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
-            Debug.LogError("Aucun Rigidbody trouvé sur " + gameObject.name);
+            Debug.LogError("Aucun Rigidbody trouvï¿½ sur " + gameObject.name);
         }
     }
 
-    // Méthode appelée pour ramasser le cochonnet.
-    // Ici, on utilise la même logique que pour les boules.
+    // Mï¿½thode appelï¿½e pour ramasser le cochonnet.
+    // Ici, on utilise la mï¿½me logique que pour les boules.
     public void PickUp(Vector3 pickupPosition)
     {
         if (pickedUp) return;
         pickedUp = true;
-        Debug.Log("Cochonnet ramassé !");
-        // On peut repositionner le cochonnet si nécessaire (par exemple, dans un inventaire virtuel)
+        launched = false;
+        Debug.Log("Cochonnet ramassï¿½ !");
+        // On peut repositionner le cochonnet si nï¿½cessaire (par exemple, dans un inventaire virtuel)
         transform.position = pickupPosition;
 
         // Assurez-vous que photonView n'est pas null (le prefab doit avoir un PhotonView)
@@ -34,31 +35,41 @@ public class CochonnetController : MonoBehaviourPun, IPunObservable
             Debug.LogError("PhotonView est null sur ce GameObject !");
             return;
         }
-        // Appel de l'RPC pour désactiver le cochonnet sur tous les clients.
+        // Appel de l'RPC pour dï¿½sactiver le cochonnet sur tous les clients.
         photonView.RPC("PickUpRPC", RpcTarget.AllBuffered);
     }
 
-    // RPC qui désactive le cochonnet pour tous les clients.
+    // RPC qui dï¿½sactive le cochonnet pour tous les clients.
     [PunRPC]
     void PickUpRPC()
     {
         gameObject.SetActive(false);
-        Debug.Log("PickUpRPC: Cochonnet désactivé (ramassé) sur tous les clients.");
+        Debug.Log("PickUpRPC: Cochonnet dï¿½sactivï¿½ (ramassï¿½) sur tous les clients.");
     }
 
-    // Méthode appelée pour lancer le cochonnet.
-    public void Launch()
+    // Mï¿½thode appelï¿½e pour lancer le cochonnet.
+    public void Launch(Transform spawnPoint)
     {
-        if (!pickedUp || launched) return;
+        if (launched) return;
         launched = true;
-        // Réactive le cochonnet pour le propriétaire afin qu'il réapparaisse lors du lancement.
+        pickedUp = false; 
+        // RÃ©active la boule pour le propriÃ©taire afin qu'elle rÃ©apparaisse lors du lancement.
         gameObject.SetActive(true);
-        Debug.Log("Launch() appelé, le cochonnet est réactivé et lancé.");
-
+        Debug.Log("Launch() appelÃ©, la boule est rÃ©activÃ©e et lancÃ©e.");
+        
         if (rb != null)
         {
-            // Applique une force dans la direction "forward" de l'objet.
-            rb.AddForce(transform.forward * launchForce);
+            // Initialise la position de la boule Ã  la position de spawnPoint
+            transform.position = spawnPoint.position;
+            // transform.rotation = spawnPoint.rotation;
+
+            // Mettre la vitesse Ã  0
+            rb.linearVelocity = Vector3.zero;
+
+            // Applique une force dans la direction "forward" de spawnPoint
+            rb.AddForce(spawnPoint.forward * launchForce);
+        } else {
+            Debug.Log("Y'a pas le rigidBody mon gate");
         }
     }
 
